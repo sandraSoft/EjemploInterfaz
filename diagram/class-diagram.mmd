@@ -1,0 +1,40 @@
+classDiagram
+    class TextDecorator {
+        <<interface>>
+        +decorate(text: String) String
+    }
+
+    class BaseDecorator {
+        #surround(text: String, left: String, right: String) String
+    }
+
+    class AsteriskDecorator {
+        +decorate(text: String) String
+    }
+
+    class ArrowDecorator {
+        +decorate(text: String) String
+    }
+
+    class HashDecorator {
+        +decorate(text: String) String
+    }
+
+    class DecoratorFactory {
+        +getDecorator(option: int) TextDecorator$
+    }
+
+    class Main {
+        +main(args: String[]) void$
+    }
+
+    BaseDecorator <|-- AsteriskDecorator
+    TextDecorator <|.. AsteriskDecorator
+    TextDecorator <|.. ArrowDecorator
+    TextDecorator <|.. HashDecorator
+
+    Main ..> DecoratorFactory : calls
+    Main ..> TextDecorator : uses
+    DecoratorFactory ..> AsteriskDecorator : creates
+    DecoratorFactory ..> ArrowDecorator : creates
+    DecoratorFactory ..> HashDecorator : creates
